@@ -3,7 +3,7 @@ TARGET =	cppf_task2
 
 IDIR =./inc
 CC=g++
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -std=c++0x -O0 -g -Wall -fmessage-length=0
 
 ODIR=./obj
 SDIR=./src
@@ -11,17 +11,17 @@ LDIR =./lib
 
 LIBS=-lm
 
-_DEPS = main.h
+_DEPS = AppServer.h Module.h Command.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = cppf_task2.o
+_OBJ = cppf_task2.o AppServer.o Module.o Command.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 all:	$(ODIR) $(TARGET)
 
 $(TARGET): $(OBJ) 
-	gcc -o $@ $^ $(CFLAGS) $(LIBS)
+	g++ -o $@ $^ $(CFLAGS) $(LIBS)
 	
 $(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
