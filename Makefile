@@ -1,15 +1,35 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
-
-OBJS =		cppf_task2.o
-
-LIBS =
 
 TARGET =	cppf_task2
 
-$(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+IDIR =./inc
+CC=g++
+CFLAGS=-I$(IDIR)
 
-all:	$(TARGET)
+ODIR=./obj
+SDIR=./src
+LDIR =./lib
+
+LIBS=-lm
+
+_DEPS = main.h
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ = cppf_task2.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+all:	$(ODIR) $(TARGET)
+
+$(TARGET): $(OBJ) 
+	gcc -o $@ $^ $(CFLAGS) $(LIBS)
+	
+$(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR):
+	@mkdir -p $@ 
+
+.PHONY: clean
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
