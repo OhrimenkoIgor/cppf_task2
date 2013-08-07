@@ -13,10 +13,8 @@ class TestModule: public Module{
 private:
 	class TestModuleCommand;
 	class CommandGetState;
-	class CommandGetName;
-	class CommandGetInterval;
-	class CommandSetName;
-	class CommandSetInterval;
+	class CommandGetParams;
+	class CommandSetParams;
 
 	bool state;
 	int interval;

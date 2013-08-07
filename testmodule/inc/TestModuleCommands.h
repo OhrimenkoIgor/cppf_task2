@@ -16,44 +16,24 @@ public:
 	virtual ~CommandGetState(){};
 };
 
-class TestModule::CommandGetName : public TestModuleCommand{
+class TestModule::CommandGetParams : public TestModuleCommand{
 	virtual void parse_arguments(std::string arguments);
 
 public:
-	CommandGetName(TestModule * p_tm);
-	virtual std::shared_ptr<Command> clone() const {return std::shared_ptr<Command>(new CommandGetName(*this));}
+	CommandGetParams(TestModule * p_tm);
+	virtual std::shared_ptr<Command> clone() const {return std::shared_ptr<Command>(new CommandGetParams(*this));}
 	virtual std::string invoke(std::string arguments);
-	virtual ~CommandGetName(){};
+	virtual ~CommandGetParams(){};
 };
 
-class TestModule::CommandGetInterval : public TestModuleCommand{
+class TestModule::CommandSetParams : public TestModuleCommand{
 	virtual void parse_arguments(std::string arguments);
 
 public:
-	CommandGetInterval(TestModule * p_tm);
-	virtual std::shared_ptr<Command> clone() const {return std::shared_ptr<Command>(new CommandGetInterval(*this));}
+	CommandSetParams(TestModule * p_tm);
+	virtual std::shared_ptr<Command> clone() const {return std::shared_ptr<Command>(new CommandSetParams(*this));}
 	virtual std::string invoke(std::string arguments);
-	virtual ~CommandGetInterval(){};
-};
-
-class TestModule::CommandSetName : public TestModuleCommand{
-	virtual void parse_arguments(std::string arguments);
-
-public:
-	CommandSetName(TestModule * p_tm);
-	virtual std::shared_ptr<Command> clone() const {return std::shared_ptr<Command>(new CommandSetName(*this));}
-	virtual std::string invoke(std::string arguments);
-	virtual ~CommandSetName(){};
-};
-
-class TestModule::CommandSetInterval : public TestModuleCommand{
-	virtual void parse_arguments(std::string arguments);
-
-public:
-	CommandSetInterval(TestModule * p_tm);
-	virtual std::shared_ptr<Command> clone() const {return std::shared_ptr<Command>(new CommandSetInterval(*this));}
-	virtual std::string invoke(std::string arguments);
-	virtual ~CommandSetInterval(){};
+	virtual ~CommandSetParams(){};
 };
 
 #endif /* TESTMODULECOMMANDS_H_ */
