@@ -11,10 +11,10 @@ LDIR =./lib
 
 LIBS=
 
-_DEPS = AppServer.h Module.h Command.h TestModule.h TestModuleCommands.h 
+_DEPS = AppServer.h Server.h Module.h Command.h TestModule.h TestModuleCommands.h Connection.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = server.o AppServer.o Module.o Command.o TestModuleCommands.o
+_OBJ = main_server.o Server.o AppServer.o Module.o Command.o TestModuleCommands.o Connection.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 

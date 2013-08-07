@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -7,20 +6,28 @@
 
 using namespace std;
 
-int main(void) {
+int main(int argc, char *argv[]) {
+	string serv_hostname, serv_port;
+
+	if (argc < 3) {
+		serv_hostname = "127.0.0.1";
+		serv_port = "12345";
+	} else {
+		serv_hostname = argv[1];
+		serv_port = argv[2];
+	}
 
 	string line;
 
-	Connection con;
+	Connection con(serv_hostname, serv_port);
 
-	while(true){
+	while (true) {
 		cout << endl << ">";
 		getline(cin, line);
-		if(line == "exit"){
+		cout << con.command(line);
+		if (line == "exit") {
 			break;
 		}
-
-		cout << con.command(line);
 	}
 
 	return EXIT_SUCCESS;
