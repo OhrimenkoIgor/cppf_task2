@@ -1,5 +1,5 @@
 
-TARGET =	server
+TARGET =	client
 
 IDIR =./inc
 CC=g++
@@ -11,10 +11,10 @@ LDIR =./lib
 
 LIBS=
 
-_DEPS = AppServer.h Module.h Command.h TestModule.h TestModuleCommands.h 
+_DEPS =   
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = server.o AppServer.o Module.o Command.o TestModuleCommands.o
+_OBJ = client.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
