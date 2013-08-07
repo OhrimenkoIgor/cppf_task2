@@ -44,7 +44,7 @@ protected:
 	virtual void parse_arguments(std::string arguments) = 0;
 
 public:
-	TestModuleCommand(TestModule * p_tm): ptm(p_tm) {}
+	TestModuleCommand(TestModule * p_tm, const std::string & name_v = "testmodulecommand"): Command(name_v), ptm(p_tm) {}
 	virtual std::shared_ptr<Command> clone() const = 0;
 	virtual std::string invoke(std::string arguments) = 0;
 	virtual ~TestModuleCommand() {}

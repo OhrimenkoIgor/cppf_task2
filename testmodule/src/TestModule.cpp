@@ -19,6 +19,10 @@ void * TestModule::tread_task(void * pthis){
 TestModule::TestModule(bool state_v, int interval_v, const std::string & name_v) : state(state_v), interval(interval_v), name(name_v), run(true) {
 	 pthread_mutex_init(&mutex_tm, NULL);
 	 int rc = pthread_create(&thread_tm, NULL, TestModule::tread_task, reinterpret_cast<void *>(this));
+	 if(rc != 0){
+		 pthread_mutex_destroy(&mutex_tm);
+		 throw "error pthread_create";
+	 }
 }
 
 TestModule::~TestModule(){
