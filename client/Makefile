@@ -11,10 +11,10 @@ LDIR =./lib
 
 LIBS=
 
-_DEPS =   
+_DEPS = Connection.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = client.o 
+_OBJ = client.o Connection.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
