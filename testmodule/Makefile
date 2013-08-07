@@ -11,10 +11,10 @@ LDIR =./lib
 
 LIBS=
 
-_DEPS =   
+_DEPS = Command.h Module.h TestModule.h TestModuleCommands.h 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = testmodule.o 
+_OBJ = main_testmodule.o Module.o Command.o TestModuleCommands.o TestModule.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 

@@ -6,6 +6,7 @@
 #include <string>
 
 class Command{
+protected:
 	virtual void parse_arguments(std::string arguments) = 0;
 
 public:
