@@ -1,4 +1,3 @@
-
 #ifndef TESTMODULE_H_
 #define TESTMODULE_H_
 
@@ -9,7 +8,7 @@
 #include "Module.h"
 #include "Command.h"
 
-class TestModule: public Module{
+class TestModule: public Module {
 private:
 	class TestModuleCommand;
 	class CommandGetState;
@@ -18,7 +17,6 @@ private:
 
 	bool state;
 	int interval;
-	std::string name;
 
 	pthread_mutex_t mutex_tm;
 	pthread_t thread_tm;
@@ -39,28 +37,29 @@ public:
 	void lock();
 	void unlock();
 
-	class Lock{
+	class Lock {
 		friend class TestModule;
 		TestModule * ptm;
 		Lock(TestModule * ptmv);
-		public:
+	public:
 		~Lock();
 	};
 
 	std::unique_ptr<TestModule::Lock> getLock();
 };
 
-class TestModule::TestModuleCommand : public Command{
+class TestModule::TestModuleCommand: public Command {
 protected:
 	TestModule * ptm;
 
-	virtual void parse_arguments(const std::string & arguments) = 0;
-
 public:
-	TestModuleCommand(TestModule * p_tm, const std::string & name_v = "testmodulecommand"): Command(name_v), ptm(p_tm) {}
+	TestModuleCommand(TestModule * p_tm, const std::string & name_v = "testmodulecommand") :
+			Command(name_v), ptm(p_tm) {
+	}
 	virtual std::shared_ptr<Command> clone() const = 0;
 	virtual std::string invoke(const std::string & arguments) = 0;
-	virtual ~TestModuleCommand() {}
+	virtual ~TestModuleCommand() {
+	}
 };
 
 #endif /* TESTMODULE_H_ */

@@ -3,7 +3,7 @@ TARGET =	client
 
 IDIR =./inc
 CC=g++
-CFLAGS=-I$(IDIR) -std=c++11 -O0 -g -Wall -fmessage-length=0 -pthread
+CFLAGS=-I$(IDIR) -std=c++11 -O0 -g -gdwarf-2 -Wall -fmessage-length=0 -pthread
 
 ODIR=./obj
 SDIR=./src

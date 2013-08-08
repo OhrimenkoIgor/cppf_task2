@@ -3,7 +3,7 @@ TARGET =	testmodule
 
 IDIR =./inc
 CC=g++
-CFLAGS=-I$(IDIR) -std=c++11 -O0 -g -Wall -fmessage-length=0 -pthread
+CFLAGS=-I$(IDIR) -std=c++11 -O0 -g -gdwarf-2 -Wall -fmessage-length=0 -pthread
 
 ODIR=./obj
 SDIR=./src
@@ -11,7 +11,7 @@ LDIR =./lib
 
 LIBS=
 
-_DEPS = Command.h Module.h TestModule.h TestModuleCommands.h 
+_DEPS = Command.h Module.h TestModule.h TestModuleCommands.h ModuleExceptions.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = main_testmodule.o Module.o Command.o TestModuleCommands.o TestModule.o
