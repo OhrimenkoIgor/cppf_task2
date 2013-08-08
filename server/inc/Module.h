@@ -8,7 +8,7 @@ class Module {
 public:
 	Module();
 	~Module();
-	std::string invoke(std::string command);
+	std::string invoke(const std::string & command);
 };
 
 #endif /* MODULE_H_ */

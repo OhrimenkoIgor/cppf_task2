@@ -1,6 +1,6 @@
 #include "AppServer.h"
 
-std::string AppServer::invoke(std::string module_command) {
+std::string AppServer::invoke(const std::string & module_command) {
 	using std::string;
 	string ret;
 

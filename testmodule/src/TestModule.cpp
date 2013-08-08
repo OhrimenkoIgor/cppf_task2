@@ -48,3 +48,23 @@ int TestModule::get_interval() {
 bool TestModule::get_state() {
 	return state;
 }
+
+void TestModule::lock(){
+	pthread_mutex_lock (&mutex_tm);
+}
+
+void TestModule::unlock(){
+	pthread_mutex_unlock (&mutex_tm);
+}
+
+TestModule::Lock::Lock(TestModule * ptmv) : ptm(ptmv) {
+	ptm->lock();
+}
+
+TestModule::Lock::~Lock(){
+	ptm->unlock();
+}
+
+std::unique_ptr<TestModule::Lock> TestModule::getLock(){
+	return std::unique_ptr<TestModule::Lock>(new TestModule::Lock(this));
+}

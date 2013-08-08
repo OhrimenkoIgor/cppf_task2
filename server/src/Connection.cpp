@@ -28,7 +28,7 @@ std::string Connection::read_string() {
 	return ret;
 }
 
-void Connection::write_string(std::string s) {
+void Connection::write_string(const std::string & s) {
 	int n = write(sockfd, s.c_str(), s.length() + 1); //TODO check if +1
 	if (n < 0)
 		throw "ERROR writing to socket";

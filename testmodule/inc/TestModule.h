@@ -35,18 +35,31 @@ public:
 	int get_interval();
 	bool get_state();
 	~TestModule();
+
+	void lock();
+	void unlock();
+
+	class Lock{
+		friend class TestModule;
+		TestModule * ptm;
+		Lock(TestModule * ptmv);
+		public:
+		~Lock();
+	};
+
+	std::unique_ptr<TestModule::Lock> getLock();
 };
 
 class TestModule::TestModuleCommand : public Command{
 protected:
 	TestModule * ptm;
 
-	virtual void parse_arguments(std::string arguments) = 0;
+	virtual void parse_arguments(const std::string & arguments) = 0;
 
 public:
 	TestModuleCommand(TestModule * p_tm, const std::string & name_v = "testmodulecommand"): Command(name_v), ptm(p_tm) {}
 	virtual std::shared_ptr<Command> clone() const = 0;
-	virtual std::string invoke(std::string arguments) = 0;
+	virtual std::string invoke(const std::string & arguments) = 0;
 	virtual ~TestModuleCommand() {}
 };
 

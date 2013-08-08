@@ -14,7 +14,7 @@ class Module{
 
 public:
 
-	std::string invoke(std::string command);
+	std::string invoke(const std::string & command);
 
 };
 

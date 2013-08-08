@@ -16,7 +16,7 @@ public:
 
 	AppServer();
 
-	std::string invoke(std::string module_command);
+	std::string invoke(const std::string & module_command);
 };
 
 #endif /* APPSERVER_H_ */

@@ -9,7 +9,7 @@
 
 #include "Server.h"
 
-Server::Server(std::string serv_port) {
+Server::Server(const std::string & serv_port) {
 	// TODO Auto-generated constructor stub
 
 	struct sockaddr_in serv_addr;

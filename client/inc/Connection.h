@@ -8,9 +8,9 @@ class Connection {
 	int sockfd;
 	int portno;
 public:
-	Connection(std::string serv_hostname = "127.0.0.1", std::string serv_port = "12345");
+	Connection(const std::string & serv_hostname = "127.0.0.1", const std::string & serv_port = "12345");
 
-	std::string command(std::string com);
+	std::string command(const std::string & com);
 
 	~Connection();
 };

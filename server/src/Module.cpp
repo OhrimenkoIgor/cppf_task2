@@ -10,7 +10,7 @@ Module::~Module() {
 	// TODO Auto-generated destructor stub
 }
 
-std::string Module::invoke(std::string command){
+std::string Module::invoke(const std::string & command){
 	using std::string;
 	string ret;
 

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Connection::Connection(string serv_hostname, string serv_port) {
+Connection::Connection(const std::string & serv_hostname, const std::string & serv_port) {
 
 	struct sockaddr_in serv_addr;
 	struct hostent *server;
@@ -37,7 +37,7 @@ Connection::~Connection() {
 	close(sockfd);
 }
 
-std::string Connection::command(std::string com) {
+std::string Connection::command(const std::string & com) {
 
 	const int SIZE = 4096;
 	char * buffer = new char [SIZE]();

@@ -10,7 +10,7 @@ public:
 	Connection(int sockfd_v);
 
 	std::string read_string();
-	void write_string(std::string);
+	void write_string(const std::string & s);
 
 	~Connection();
 };
