@@ -5,8 +5,6 @@
 
 using std::string;
 
-//TODO
-
 TestModule::CommandGetState::CommandGetState(TestModule * p_tm, const std::string & name_v) :
 		TestModuleCommand(p_tm, name_v) {
 }

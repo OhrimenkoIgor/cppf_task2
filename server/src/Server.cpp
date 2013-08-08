@@ -10,7 +10,7 @@
 #include "Server.h"
 
 Server::Server(const std::string & serv_port) {
-	// TODO Auto-generated constructor stub
+	// TODO exceptions
 
 	struct sockaddr_in serv_addr;
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);

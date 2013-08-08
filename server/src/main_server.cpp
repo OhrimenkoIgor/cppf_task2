@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 
 	ThreadArg ta[3];
 
-	//TODO change connection nubber
+	//TODO change connection number
 	for (int i = 0; i < 3; i++) {
 		ta[i].con = serv.accept_connection();
 		int rc = pthread_create(&ta[i].thread, NULL, TaskCode, (void *) &ta[i]);

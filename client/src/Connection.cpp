@@ -13,6 +13,7 @@ using namespace std;
 
 Connection::Connection(const std::string & serv_hostname, const std::string & serv_port) {
 
+	// TODO exceptions
 	struct sockaddr_in serv_addr;
 	struct hostent *server;
 
