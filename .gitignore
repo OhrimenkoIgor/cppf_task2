@@ -15,3 +15,7 @@
 server/server
 client/client
 testmodule/testmodule
+lib/libmodulelib.a
+
+client/.settings
+

@@ -5,10 +5,12 @@
 
 #include <pthread.h>
 
+#include "Mutex.h"
 #include "Module.h"
 #include "Command.h"
 
-class TestModule: public Module {
+
+class TestModule: public Module, public Mutex {
 private:
 	class TestModuleCommand;
 	class CommandGetState;
@@ -18,7 +20,6 @@ private:
 	bool state;
 	int interval;
 
-	pthread_mutex_t mutex_tm;
 	pthread_t thread_tm;
 
 	bool run;
@@ -33,19 +34,6 @@ public:
 	int get_interval();
 	bool get_state();
 	~TestModule();
-
-	void lock();
-	void unlock();
-
-	class Lock {
-		friend class TestModule;
-		TestModule * ptm;
-		Lock(TestModule * ptmv);
-	public:
-		~Lock();
-	};
-
-	std::unique_ptr<TestModule::Lock> getLock();
 };
 
 class TestModule::TestModuleCommand: public Command {

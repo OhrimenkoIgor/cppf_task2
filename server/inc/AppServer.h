@@ -6,11 +6,11 @@
 #include <string>
 #include <memory>
 
-#include "Module.h"
+#include "ModuleInterface.h"
 
 class AppServer{
 
-	std::map<std::string, std::shared_ptr<Module> > modules;
+	std::map<std::string, std::shared_ptr<ModuleInterface> > modules;
 
 public:
 

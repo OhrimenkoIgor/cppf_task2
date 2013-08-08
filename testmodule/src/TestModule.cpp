@@ -8,10 +8,10 @@ void * TestModule::tread_task(void * pthis) {
 	TestModule * ptm = reinterpret_cast<TestModule *>(pthis);
 	while (ptm->run) {
 		sleep(ptm->interval);
-		pthread_mutex_lock(&ptm->mutex_tm);
+		ptm->lock();
 		ptm->state = !ptm->state;
 		std::cout << ptm->name << " new state is: " << ptm->state << std::endl;
-		pthread_mutex_unlock(&ptm->mutex_tm);
+		ptm->unlock();
 	}
 	pthread_exit(NULL);
 }
@@ -26,20 +26,17 @@ TestModule::TestModule(bool state_v, int interval_v, const std::string & name_v)
 	commands[spc->get_name()] = spc;
 	commands[gsc->get_name()] = gsc;
 
-	pthread_mutex_init(&mutex_tm, NULL);
 	int rc = pthread_create(&thread_tm, NULL, TestModule::tread_task, reinterpret_cast<void *>(this));
 	if (rc != 0) {
-		pthread_mutex_destroy(&mutex_tm);
 		throw "error pthread_create";
 	}
 }
 
 TestModule::~TestModule() {
 	run = false;
-	pthread_mutex_lock(&mutex_tm);
+	lock();
 	pthread_cancel(thread_tm);
-	pthread_mutex_unlock(&mutex_tm);
-	pthread_mutex_destroy(&mutex_tm);
+	unlock();
 }
 
 void TestModule::set_name(const std::string & new_name) {
@@ -56,25 +53,4 @@ int TestModule::get_interval() {
 }
 bool TestModule::get_state() {
 	return state;
-}
-
-void TestModule::lock() {
-	pthread_mutex_lock(&mutex_tm);
-}
-
-void TestModule::unlock() {
-	pthread_mutex_unlock(&mutex_tm);
-}
-
-TestModule::Lock::Lock(TestModule * ptmv) :
-		ptm(ptmv) {
-	ptm->lock();
-}
-
-TestModule::Lock::~Lock() {
-	ptm->unlock();
-}
-
-std::unique_ptr<TestModule::Lock> TestModule::getLock() {
-	return std::unique_ptr < TestModule::Lock > (new TestModule::Lock(this));
 }

@@ -2,14 +2,15 @@
 TARGET =	client
 
 IDIR =./inc
+LIDIR=../lib/inc
 CC=g++
-CFLAGS=-I$(IDIR) -std=c++11 -O0 -g -gdwarf-2 -Wall -fmessage-length=0 -pthread
+CFLAGS=-I$(IDIR) -I$(LIDIR) -std=c++11 -O0 -g -gdwarf-2 -Wall -fmessage-length=0 -pthread
 
 ODIR=./obj
 SDIR=./src
 LDIR =./lib
 
-LIBS=
+LIBS= -L../lib/ -lmodulelib
 
 _DEPS = Connection.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
