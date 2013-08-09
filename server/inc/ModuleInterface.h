@@ -4,15 +4,11 @@
 
 #include <string>
 
-#include <mqueue.h>
-#include <pthread.h>
-
 #include "IModule.h"
 #include "Mutex.h"
+#include "MessageQueue.h"
 
-class ModuleInterface : public IModule, public Mutex {
-private:
-	mqd_t msgq_id;
+class ModuleInterface : public IModule, public Mutex, public MessageQueue {
 public:
 	ModuleInterface(const std::string & module_name);
 	~ModuleInterface();

@@ -10,7 +10,7 @@ ODIR=./obj
 SDIR=./src
 LDIR =./lib
 
-LIBS= -L../lib/ -lmodulelib
+LIBS= -L../lib/ -lmodulelib -lrt
 
 _DEPS = TestModule.h TestModuleCommands.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))

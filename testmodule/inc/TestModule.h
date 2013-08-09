@@ -7,10 +7,12 @@
 
 #include "Mutex.h"
 #include "Module.h"
+#include "MessageQueue.h"
+
 #include "Command.h"
 
 
-class TestModule: public Module, public Mutex {
+class TestModule: public Module, public Mutex, public MessageQueue {
 private:
 	class TestModuleCommand;
 	class CommandGetState;

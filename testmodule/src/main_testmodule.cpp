@@ -22,11 +22,18 @@ int main(void) {
 	std::string ans8 = tm.invoke("setparams");
 */
 
+
 	std::string line;
 
 	while (true) {
-		getline(std::cin, line);
-		if (line == "exit") {
+		//getline(std::cin, line);
+		//if (line == "exit") {
+		//	break;
+		//}
+		std::string mes = tm.receive_message();
+		std::string ans = tm.invoke(mes);
+		tm.send_message(ans);
+		if (mes == "exit") {
 			break;
 		}
 	}

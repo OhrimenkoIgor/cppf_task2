@@ -10,14 +10,14 @@ void * TestModule::tread_task(void * pthis) {
 		sleep(ptm->interval);
 		ptm->lock();
 		ptm->state = !ptm->state;
-		std::cout << ptm->name << " new state is: " << ptm->state << std::endl;
+		//TODO uncomment //std::cout << ptm->Module::name << " new state is: " << ptm->state << std::endl;
 		ptm->unlock();
 	}
 	pthread_exit(NULL);
 }
 
 TestModule::TestModule(bool state_v, int interval_v, const std::string & name_v) :
-		Module(name_v), state(state_v), interval(interval_v), run(true) {
+		Module(name_v), MessageQueue(name_v, MessageQueue::Mode::CREATE), state(state_v), interval(interval_v), run(true) {
 
 	std::shared_ptr<Command> gpc(new CommandGetParams(this, "getparams"));
 	std::shared_ptr<Command> spc(new CommandSetParams(this, "testmodule", 1, "setparams"));
@@ -40,10 +40,10 @@ TestModule::~TestModule() {
 }
 
 void TestModule::set_name(const std::string & new_name) {
-	name = new_name;
+	Module::name = new_name;
 }
 std::string TestModule::get_name() {
-	return name;
+	return Module::name;
 }
 void TestModule::set_interval(int new_interval) {
 	interval = new_interval;

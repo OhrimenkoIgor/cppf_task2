@@ -11,10 +11,10 @@ LDIR =./lib
 
 LIBS=
 
-_DEPS = IModule.h Module.h Mutex.h Command.h      ModuleExceptions.h
+_DEPS = IModule.h Module.h Mutex.h Command.h MessageQueue.h     ModuleExceptions.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = IModule.o Module.o Mutex.o Command.o
+_OBJ = IModule.o Module.o Mutex.o Command.o MessageQueue.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
