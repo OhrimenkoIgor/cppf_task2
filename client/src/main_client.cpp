@@ -5,7 +5,7 @@
 #include "Connection.h"
 
 using namespace std;
-/*
+
 int main(int argc, char *argv[]) {
 	string serv_hostname, serv_port;
 
@@ -32,8 +32,9 @@ int main(int argc, char *argv[]) {
 
 	return EXIT_SUCCESS;
 }
-*/
 
+
+/*
 #include "MessageQueue.h"
 
 int main(int argc, char *argv[]) {
@@ -54,3 +55,5 @@ int main(int argc, char *argv[]) {
 
 	return EXIT_SUCCESS;
 }
+
+*/
