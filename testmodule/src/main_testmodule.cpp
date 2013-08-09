@@ -23,16 +23,14 @@ int main(void) {
 */
 
 
-	std::string line;
+	std::string mes;
 
 	while (true) {
-		//getline(std::cin, line);
-		//if (line == "exit") {
-		//	break;
-		//}
-		std::string mes = tm.receive_message();
-		std::string ans = tm.invoke(mes);
-		tm.send_message(ans);
+		getline(std::cin, mes);
+
+		//std::string mes = tm.receive_message();
+		//std::string ans = tm.invoke(mes);
+		//tm.send_message(ans);
 		if (mes == "exit") {
 			break;
 		}

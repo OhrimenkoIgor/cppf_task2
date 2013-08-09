@@ -10,7 +10,7 @@ void * TestModule::tread_task(void * pthis) {
 		sleep(ptm->interval);
 		ptm->lock();
 		ptm->state = !ptm->state;
-		//TODO uncomment //std::cout << ptm->Module::name << " new state is: " << ptm->state << std::endl;
+		std::cout << ptm->Module::name << " new state is: " << ptm->state << std::endl;
 		ptm->unlock();
 	}
 	pthread_exit(NULL);
