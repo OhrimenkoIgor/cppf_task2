@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <list>
 
 #include <pthread.h>
 
@@ -13,6 +14,7 @@ AppServer appserver;
 struct ThreadArg {
 	pthread_t thread;
 	std::shared_ptr<Connection> con;
+	bool done = false;
 };
 
 void *TaskCode(void *argument) {
@@ -29,7 +31,7 @@ void *TaskCode(void *argument) {
 			break;
 		}
 	}
-
+	pa->done = true;
 	pthread_exit(NULL);
 }
 
@@ -47,16 +49,24 @@ int main(int argc, char *argv[]) {
 
 	Server serv(serv_port);
 
-	ThreadArg ta[3];
+	std::list<ThreadArg> talist;
 
-	//TODO change connection number
-	for (int i = 0; i < 3; i++) {
-		ta[i].con = serv.accept_connection();
-		int rc = pthread_create(&ta[i].thread, NULL, TaskCode, (void *) &ta[i]);
-	}
+	ThreadArg ta;
+	for (;;) {
+		talist.push_back(ta);
+		talist.back().con = serv.accept_connection();
+		int rc = pthread_create(&(talist.back().thread), NULL, TaskCode, (void *) &talist.back());
 
-	for (int i = 0; i < 3; ++i) {
-		int rc = pthread_join(ta[i].thread, NULL);
+		//remove all finished threads. may be in another thread, but list must be locked by mutex
+		for (auto it = talist.begin(); it != talist.end();) {
+			if (it->done) {
+				rc = pthread_join(it->thread, 0);
+				it = talist.erase(it);
+			} else {
+				++it;
+			}
+		}
+
 	}
 
 	return EXIT_SUCCESS;

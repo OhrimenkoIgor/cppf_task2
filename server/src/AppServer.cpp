@@ -10,7 +10,6 @@ std::string AppServer::invoke(const std::string & module_command) {
 	using std::string;
 	string ret;
 
-	//TODO
 	try {
 		std::string module_name, command;
 		size_t dc_pos = module_command.find("::");
@@ -27,7 +26,7 @@ std::string AppServer::invoke(const std::string & module_command) {
 		}
 
 	} catch (const std::out_of_range& oor) {
-
+		ret = "no such module";
 	}
 
 	return ret;
@@ -48,7 +47,7 @@ void AppServer::add_module(const std::string & name, const std::string & path) {
 		char * envVec[] = { NULL };
 		execve(path.c_str(), argVec, envVec);
 	} else {/* Parent comes here after successful fork() */
-		//TODO fix it for example with pipe.
+		//TODO fix sleep(1); for example with pipe.
 		sleep(1);
 		modules.emplace(name, std::shared_ptr<ModuleInterface>(new ModuleInterface(name, childPid)));
 	}

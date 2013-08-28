@@ -52,7 +52,7 @@ std::string Connection::read_string() {
 }
 
 void Connection::write_string(const std::string & s) {
-	int n = write(sockfd, s.c_str(), s.length() + 1); //TODO check if +1
+	int n = write(sockfd, s.c_str(), s.length() + 1);
 	if (n < 0)
 		throw "ERROR writing to socket";
 }
