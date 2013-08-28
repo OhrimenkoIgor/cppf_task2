@@ -3,6 +3,7 @@
 	<name>cppf_task2</name>
 	<comment></comment>
 	<projects>
+		<project>lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

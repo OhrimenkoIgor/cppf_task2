@@ -3,6 +3,7 @@
 	<name>testmodule</name>
 	<comment></comment>
 	<projects>
+		<project>lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

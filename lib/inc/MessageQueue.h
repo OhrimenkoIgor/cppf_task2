@@ -9,6 +9,8 @@
 class MessageQueue {
 	mqd_t msgq_id;
 	std::string name;
+	int buf_size;
+
 public:
 
 	enum class Mode{
@@ -16,7 +18,7 @@ public:
 		OPEN
 	};
 
-	MessageQueue(const std::string & queue_name, MessageQueue::Mode mode);
+	MessageQueue(const std::string & queue_name, MessageQueue::Mode mode, int queue_buf_size);
 	~MessageQueue();
 
 	std::string receive_message();

@@ -12,10 +12,10 @@ LDIR =./lib
 
 LIBS= -L../lib/ -lmodulelib -lrt
 
-_DEPS = Connection.h
+_DEPS = 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main_client.o Connection.o
+_OBJ = main_client.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 

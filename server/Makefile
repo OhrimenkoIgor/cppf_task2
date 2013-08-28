@@ -12,10 +12,10 @@ LDIR =./lib
 
 LIBS= -L../lib/ -lmodulelib -lrt
 
-_DEPS = AppServer.h Server.h Connection.h ModuleInterface.h
+_DEPS = AppServer.h ModuleInterface.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main_server.o Server.o AppServer.o Connection.o ModuleInterface.o
+_OBJ =  AppServer.o ModuleInterface.o main_server.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 

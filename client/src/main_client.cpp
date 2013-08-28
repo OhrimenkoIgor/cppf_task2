@@ -2,7 +2,7 @@
 #include <string>
 #include <cstdlib>
 
-#include "Connection.h"
+#include "InetSockets.h"
 
 using namespace std;
 
@@ -24,7 +24,8 @@ int main(int argc, char *argv[]) {
 	while (true) {
 		cout << endl << ">";
 		getline(cin, line);
-		cout << con.command(line);
+		con.write_string(line);
+		cout << con.read_string();
 		if (line == "exit") {
 			break;
 		}

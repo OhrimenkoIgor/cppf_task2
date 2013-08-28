@@ -26,11 +26,11 @@ int main(void) {
 	std::string mes;
 
 	while (true) {
-		getline(std::cin, mes);
+		//getline(std::cin, mes);
 
-		//std::string mes = tm.receive_message();
-		//std::string ans = tm.invoke(mes);
-		//tm.send_message(ans);
+		std::string mes = tm.receive_message();
+		std::string ans = tm.invoke(mes);
+		tm.send_message(ans);
 		if (mes == "exit") {
 			break;
 		}

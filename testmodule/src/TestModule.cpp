@@ -17,7 +17,7 @@ void * TestModule::tread_task(void * pthis) {
 }
 
 TestModule::TestModule(bool state_v, int interval_v, const std::string & name_v) :
-		Module(name_v), MessageQueue(name_v, MessageQueue::Mode::CREATE), state(state_v), interval(interval_v), run(true) {
+		Module(name_v), MessageQueue(name_v, MessageQueue::Mode::CREATE, 8192), state(state_v), interval(interval_v), run(true) {
 
 	std::shared_ptr<Command> gpc(new CommandGetParams(this, "getparams"));
 	std::shared_ptr<Command> spc(new CommandSetParams(this, "testmodule", 1, "setparams"));

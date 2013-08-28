@@ -1,12 +1,15 @@
 
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include "ModuleInterface.h"
 
-ModuleInterface::ModuleInterface(const std::string & module_name) : IModule(module_name), MessageQueue(module_name, MessageQueue::Mode::OPEN){
+ModuleInterface::ModuleInterface(const std::string & module_name, pid_t module_pid) : IModule(module_name), MessageQueue(module_name, MessageQueue::Mode::OPEN, 8192), pid(module_pid){
 
 }
 
 ModuleInterface::~ModuleInterface() {
-
+	waitpid(pid, 0, 0);
 }
 
 std::string ModuleInterface::invoke(const std::string & command) {

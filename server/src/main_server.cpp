@@ -4,7 +4,11 @@
 
 #include <pthread.h>
 
-#include "Server.h"
+#include "InetSockets.h"
+
+#include "AppServer.h"
+
+AppServer appserver;
 
 struct ThreadArg {
 	pthread_t thread;
@@ -15,20 +19,23 @@ void *TaskCode(void *argument) {
 	ThreadArg * pa = reinterpret_cast<ThreadArg *>(argument);
 
 	std::string line;
+	std::string ans;
+
 	while (true) {
 		line = pa->con->read_string();
+		ans = appserver.invoke(line);
+		pa->con->write_string(ans);
 		if (line == "exit") {
-			pa->con->write_string(line);
 			break;
 		}
-		//TODO
-		pa->con->write_string(line);
 	}
 
 	pthread_exit(NULL);
 }
 
 int main(int argc, char *argv[]) {
+
+	appserver.add_module("testmodule", "/home/ejfori/git/cppf_task2/testmodule/testmodule");
 
 	std::string serv_port;
 

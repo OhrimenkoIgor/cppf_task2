@@ -4,13 +4,16 @@
 
 #include <string>
 
+#include <unistd.h>
+
 #include "IModule.h"
 #include "Mutex.h"
 #include "MessageQueue.h"
 
 class ModuleInterface : public IModule, public Mutex, public MessageQueue {
+	 pid_t pid;
 public:
-	ModuleInterface(const std::string & module_name);
+	ModuleInterface(const std::string & module_name, pid_t module_pid);
 	~ModuleInterface();
 	std::string invoke(const std::string & command);
 };

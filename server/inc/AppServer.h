@@ -16,6 +16,8 @@ public:
 
 	AppServer();
 
+	void add_module(const std::string & name, const std::string & path);
+
 	std::string invoke(const std::string & module_command);
 };
 
