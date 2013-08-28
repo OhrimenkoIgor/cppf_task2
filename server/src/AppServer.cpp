@@ -10,23 +10,34 @@ std::string AppServer::invoke(const std::string & module_command) {
 	using std::string;
 	string ret;
 
-	try {
-		std::string module_name, command;
-		size_t dc_pos = module_command.find("::");
-
-		if (dc_pos != string::npos) {
-			module_name = module_command.substr(0, dc_pos);
-			command = module_command.substr(dc_pos + 2, string::npos);
-		} else {
-			command = module_command;
+	if (module_command == "help") {
+		ret = "Modules:";
+		for (auto it = modules.cbegin(); it != modules.cend(); ++it) {
+			ret += " ";
+			ret += it->first;
 		}
+	} else {
 
-		if (module_name != "") {
-			ret = modules.at(module_name)->invoke(command);
+		try {
+			std::string module_name, command;
+			size_t dc_pos = module_command.find("::");
+
+			if (dc_pos != string::npos) {
+				module_name = module_command.substr(0, dc_pos);
+				command = module_command.substr(dc_pos + 2, string::npos);
+			} else {
+				command = module_command;
+			}
+
+			if (module_name != "") {
+				ret = modules.at(module_name)->invoke(command);
+			} else {
+				ret = "no such module";
+			}
+
+		} catch (const std::out_of_range& oor) {
+			ret = "no such module";
 		}
-
-	} catch (const std::out_of_range& oor) {
-		ret = "no such module";
 	}
 
 	return ret;
@@ -34,8 +45,7 @@ std::string AppServer::invoke(const std::string & module_command) {
 
 void AppServer::add_module(const std::string & name, const std::string & path) {
 
-	pid_t childPid; /* Used in parent after successful fork()
-	 to record PID of child */
+	pid_t childPid; /* Used in parent after successful fork() to record PID of child */
 	childPid = fork();
 	if (childPid == -1) { /* fork() failed */
 		/* Handle error */
@@ -49,6 +59,6 @@ void AppServer::add_module(const std::string & name, const std::string & path) {
 	} else {/* Parent comes here after successful fork() */
 		//TODO fix sleep(1); for example with pipe.
 		sleep(1);
-		modules.emplace(name, std::shared_ptr<ModuleInterface>(new ModuleInterface(name, childPid)));
+		modules.emplace(name, std::shared_ptr < ModuleInterface > (new ModuleInterface(name, childPid)));
 	}
 }

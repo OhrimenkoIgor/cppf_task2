@@ -1,6 +1,7 @@
 
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 #include "ModuleInterface.h"
 
@@ -9,6 +10,8 @@ ModuleInterface::ModuleInterface(const std::string & module_name, pid_t module_p
 }
 
 ModuleInterface::~ModuleInterface() {
+	//TODO add everywhere error checking
+	kill(pid, SIGKILL);
 	waitpid(pid, 0, 0);
 }
 
