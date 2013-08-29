@@ -62,8 +62,7 @@ int main(int argc, char *argv[]) {
 		talist.back().con = serv.accept_connection();
 		rc = pthread_create(&(talist.back().thread), &attr, TaskCode, (void *) &talist.back());
 
-		//remove all finished threads. may be in another thread, but list must be locked by mutex
-
+		//remove all finished threads. may be in another thread, but list must be locked by mutex. can be map instead list
 //		for (auto it = talist.begin(); it != talist.end();) {
 //			if (it->done) {
 //				rc = pthread_join(it->thread, 0);
@@ -72,8 +71,7 @@ int main(int argc, char *argv[]) {
 //				++it;
 //			}
 //		}
-
-		talist.remove_if ([](ThreadArg & ta){return ta.done;});
+		talist.remove_if([](const ThreadArg & ta) {return ta.done;});
 
 	}
 

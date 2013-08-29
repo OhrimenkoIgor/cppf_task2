@@ -7,6 +7,7 @@ in new tab:
 
 supported commands
 help
+testmodule::help
 testmodule::getstate
 testmodule::getparams
 testmodule::setparams

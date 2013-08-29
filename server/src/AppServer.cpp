@@ -9,6 +9,7 @@ AppServer::AppServer() {
 std::string AppServer::invoke(const std::string & module_command) {
 	using std::string;
 	string ret;
+	std::string module_name, command;
 
 	if (module_command == "help") {
 		ret = "Modules:";
@@ -19,24 +20,25 @@ std::string AppServer::invoke(const std::string & module_command) {
 	} else {
 
 		try {
-			std::string module_name, command;
 			size_t dc_pos = module_command.find("::");
 
 			if (dc_pos != string::npos) {
 				module_name = module_command.substr(0, dc_pos);
 				command = module_command.substr(dc_pos + 2, string::npos);
 			} else {
-				command = module_command;
+				//TODO next line is for searching command in modules. now it is interpreted as module name
+				//command = module_command;
+				module_name = module_command;
 			}
 
-			if (module_name != "") {
-				ret = modules.at(module_name)->invoke(command);
-			} else {
-				ret = "no such module";
-			}
+			//if (module_name != "") {
+			ret = modules.at(module_name)->invoke(command);
+			//} else {
+			//	ret = "Server: no module";
+			//}
 
 		} catch (const std::out_of_range& oor) {
-			ret = "no such module";
+			ret = "Server: no module \"" + module_name +"\"";
 		}
 	}
 
