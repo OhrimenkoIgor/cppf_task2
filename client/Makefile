@@ -1,5 +1,5 @@
 
-TARGET =	client
+TARGET =	client.elf
 
 IDIR =./inc
 LIDIR=../lib/inc
@@ -33,4 +33,4 @@ $(ODIR):
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ $(TARGET)

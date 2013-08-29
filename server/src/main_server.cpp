@@ -38,7 +38,7 @@ void *TaskCode(void *argument) {
 int main(int argc, char *argv[]) {
 	int rc = 0;
 
-	appserver.add_module("testmodule", "/home/ejfori/git/cppf_task2/testmodule/testmodule");
+	appserver.add_module("testmodule", "/home/ejfori/git/cppf_task2/testmodule/testmodule.elf");
 
 	std::string serv_port;
 
