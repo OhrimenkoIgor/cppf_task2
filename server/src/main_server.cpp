@@ -36,6 +36,7 @@ void *TaskCode(void *argument) {
 }
 
 int main(int argc, char *argv[]) {
+	int rc = 0;
 
 	appserver.add_module("testmodule", "/home/ejfori/git/cppf_task2/testmodule/testmodule");
 
@@ -52,20 +53,27 @@ int main(int argc, char *argv[]) {
 	std::list<ThreadArg> talist;
 
 	ThreadArg ta;
+	pthread_attr_t attr;
+	rc = pthread_attr_init(&attr);
+	rc = pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+
 	for (;;) {
 		talist.push_back(ta);
 		talist.back().con = serv.accept_connection();
-		int rc = pthread_create(&(talist.back().thread), NULL, TaskCode, (void *) &talist.back());
+		rc = pthread_create(&(talist.back().thread), &attr, TaskCode, (void *) &talist.back());
 
 		//remove all finished threads. may be in another thread, but list must be locked by mutex
-		for (auto it = talist.begin(); it != talist.end();) {
-			if (it->done) {
-				rc = pthread_join(it->thread, 0);
-				it = talist.erase(it);
-			} else {
-				++it;
-			}
-		}
+
+//		for (auto it = talist.begin(); it != talist.end();) {
+//			if (it->done) {
+//				rc = pthread_join(it->thread, 0);
+//				it = talist.erase(it);
+//			} else {
+//				++it;
+//			}
+//		}
+
+		talist.remove_if ([](ThreadArg & ta){return ta.done;});
 
 	}
 
